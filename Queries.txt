@@ -1,2 +1,121 @@
 
-Creating Database 
+
+1..
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(50) NOT NULL,
+    Location VARCHAR(100) NOT NULL
+);
+
+
+
+
+
+2..
+CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(50) NOT NULL,
+    Specialization VARCHAR(50) NOT NULL,
+    Phone VARCHAR(15),
+    DepartmentID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
+);
+
+
+
+
+3.. Started useing small letters cause typing capital letters is felt annoying.
+create table Patients(
+	PatientID int auto_increment,
+    Name varchar(100) not null,
+    Age int not null,
+    Gender enum('Male', 'Female', 'Others') not null,
+    Phone varchar(15),
+    primary key(PatientID)
+);
+
+
+
+
+4..
+create table Appointments(
+	AppointmentId int,
+    Date date not null,
+    Time time not null,
+    Status enum('Scheduled', 'Completed', 'Cancelled') default 'Scheduled',
+    DoctorID int,
+    PatientID int,
+    primary key(AppointmentID),
+    foreign key(DoctorID) references doctors(DoctorID) on update cascade on delete cascade,
+    foreign key(PatientID) references patients(PatientID) on update cascade on delete cascade
+);
+
+
+
+5..
+show tables;
+
+
+
+6.. Dymmy data from chatgpt
+
+insert into Departments(Name, Location) values
+    ('Cardiology', 'Building A'),
+    ('Neurology', 'Building B'),
+    ('Orthopedics', 'Building C'),
+    ('Pediatrics', 'Building D'),
+    ('Dermatology', 'Building E');
+
+
+
+select * from departments;
+
+INSERT INTO Doctors (Name, Specialization, Phone, DepartmentID)
+VALUES 
+    ('Dr. Alice Johnson', 'Cardiologist', '123-456-7890', 1),
+    ('Dr. Bob Smith', 'Neurologist', '234-567-8901', 2),
+    ('Dr. Clara Brown', 'Orthopedic Surgeon', '345-678-9012', 3),
+    ('Dr. David Wilson', 'Pediatrician', '456-789-0123', 4),
+    ('Dr. Emily Davis', 'Dermatologist', '567-890-1234', 5);
+
+
+
+
+
+
+alter table appointments modify column AppointmentID int auto_increment;
+
+
+
+INSERT INTO Appointments (Date, Time, Status, DoctorID, PatientID)
+VALUES 
+    ('2024-12-26', '10:00:00', 'Scheduled', 1, 1),
+    ('2024-12-27', '11:30:00', 'Scheduled', 2, 2),
+    ('2024-12-28', '14:00:00', 'Scheduled', 3, 3),
+    ('2024-12-29', '16:15:00', 'Scheduled', 4, 4),
+    ('2024-12-30', '09:00:00', 'Scheduled', 5, 5);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
